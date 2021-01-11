@@ -15,7 +15,6 @@ import LandingScreen from "./components/auth/Landing";
 import RegisterScreen from "./components/auth/Register";
 import LoginScreen from "./components/auth/Login";
 import MainScreen from "./components/Main";
-
 import { firebaseConfig } from "./config";
 
 if (firebase.apps.length === 0) {
@@ -69,7 +68,7 @@ export default class App extends Component {
     }
 
     return (
-      <Provider store={store}>
+      <Provider>
         <MainScreen />
       </Provider>
     );
