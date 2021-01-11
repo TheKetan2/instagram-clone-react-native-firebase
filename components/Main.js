@@ -10,13 +10,19 @@ class Main extends Component {
     this.props.fetchUser();
   }
   render() {
+    const { currentUser } = this.props;
+    console.log("currentUser: ", currentUser);
     return (
       <View style={styles.container}>
-        <Text> textInComponent </Text>
+        <Text> user Logged in: {currentUser?.email} </Text>
       </View>
     );
   }
 }
+
+const mapStateToProps = (store) => ({
+  currentUser: store.userState.currentUser,
+});
 
 const mapDispatchProps = (dispatch) =>
   bindActionCreators(
@@ -26,7 +32,7 @@ const mapDispatchProps = (dispatch) =>
     dispatch
   );
 
-export default connect(null, mapDispatchProps)(Main);
+export default connect(mapStateToProps, mapDispatchProps)(Main);
 
 const styles = StyleSheet.create({
   container: {
