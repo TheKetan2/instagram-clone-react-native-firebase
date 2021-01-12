@@ -24,13 +24,13 @@ class Main extends Component {
     const { currentUser } = this.props;
     console.log("currentUser: ", currentUser);
     return (
-      <Tab.Navigator initialRouteName="Feed">
+      <Tab.Navigator initialRouteName="Feed" labeled={false}>
         <Tab.Screen
           name="Feed"
           component={Feed}
           options={{
             tabBarIcon: ({ color, size }) => (
-              <MaterialCommunityIcons name="home" color={26} color={color} />
+              <MaterialCommunityIcons name="home" size={24} color={color} />
             ),
           }}
         />
@@ -45,11 +45,7 @@ class Main extends Component {
           })}
           options={{
             tabBarIcon: ({ color, size }) => (
-              <MaterialCommunityIcons
-                name="plus-box"
-                color={26}
-                color={color}
-              />
+              <MaterialCommunityIcons name="plus-box" size={24} color={color} />
             ),
           }}
         />
@@ -60,7 +56,7 @@ class Main extends Component {
             tabBarIcon: ({ color, size }) => (
               <MaterialCommunityIcons
                 name="account-circle"
-                color={26}
+                size={24}
                 color={color}
               />
             ),
