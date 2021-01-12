@@ -10,11 +10,14 @@ const store = createStore(rootReducer, applyMiddleware(thunk));
 
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
 import LandingScreen from "./components/auth/Landing";
 import RegisterScreen from "./components/auth/Register";
 import LoginScreen from "./components/auth/Login";
 import MainScreen from "./components/Main";
+import Add from "./components/main/Add";
+
 import { firebaseConfig } from "./config";
 
 if (firebase.apps.length === 0) {
@@ -22,6 +25,7 @@ if (firebase.apps.length === 0) {
 }
 
 const Stack = createStackNavigator();
+const Tab = createBottomTabNavigator();
 
 export default class App extends Component {
   constructor(props) {
@@ -69,7 +73,16 @@ export default class App extends Component {
 
     return (
       <Provider store={store}>
-        <MainScreen />
+        <NavigationContainer>
+          <Stack.Navigator initialRouteName="Main">
+            <Stack.Screen
+              name="Main"
+              component={MainScreen}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen name="Add" component={Add} />
+          </Stack.Navigator>
+        </NavigationContainer>
       </Provider>
     );
   }

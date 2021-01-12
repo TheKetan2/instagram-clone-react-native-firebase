@@ -1,9 +1,20 @@
 import React, { Component } from "react";
-import { Text, View, StyleSheet } from "react-native";
+import { Text, View, StyleSheet, Settings } from "react-native";
+import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
+
+// Screens
+import Feed from "./main/Feed";
+import Profile from "./main/Profile";
+import Add from "./main/Add";
+// Screens
 
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { fetchUser } from "../redux/actions/index";
+import { NavigationContainer } from "@react-navigation/native";
+import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
+
+const Tab = createMaterialBottomTabNavigator();
 
 class Main extends Component {
   componentDidMount() {
@@ -13,9 +24,49 @@ class Main extends Component {
     const { currentUser } = this.props;
     console.log("currentUser: ", currentUser);
     return (
-      <View style={styles.container}>
-        <Text> user Logged in: {currentUser?.email} </Text>
-      </View>
+      <Tab.Navigator initialRouteName="Feed">
+        <Tab.Screen
+          name="Feed"
+          component={Feed}
+          options={{
+            tabBarIcon: ({ color, size }) => (
+              <MaterialCommunityIcons name="home" color={26} color={color} />
+            ),
+          }}
+        />
+        <Tab.Screen
+          name="MainAdd"
+          component={() => null}
+          listeners={({ navigation }) => ({
+            tabPress: (event) => {
+              event.preventDefault();
+              navigation.navigate("Add");
+            },
+          })}
+          options={{
+            tabBarIcon: ({ color, size }) => (
+              <MaterialCommunityIcons
+                name="plus-box"
+                color={26}
+                color={color}
+              />
+            ),
+          }}
+        />
+        <Tab.Screen
+          name="Profile"
+          component={Profile}
+          options={{
+            tabBarIcon: ({ color, size }) => (
+              <MaterialCommunityIcons
+                name="account-circle"
+                color={26}
+                color={color}
+              />
+            ),
+          }}
+        />
+      </Tab.Navigator>
     );
   }
 }
