@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import { StyleSheet, Text, View, TextInput, Image, Button } from "react-native";
 import firebase from "firebase";
+import { NavigationContainer } from "@react-navigation/native";
 
 require("firebase/firestore");
 require("firebase/firebase-storage");
 
-const Save = ({ route }) => {
+const Save = ({ route, navigation }) => {
   const { imageUri } = route.params;
   const [caption, setCaption] = useState("");
 
@@ -25,6 +26,7 @@ const Save = ({ route }) => {
     const taskCompleted = () => {
       task.snapshot.ref.getDownloadURL().then((url) => {
         console.log("url: ", url);
+        savePostData(url);
       });
     };
 
@@ -34,6 +36,23 @@ const Save = ({ route }) => {
 
     task.on("state_changed", taskProgress, taskError, taskCompleted);
   };
+
+  savePostData = (url) => {
+    firebase
+      .firestore()
+      .collection(`posts`)
+      .doc(firebase.auth().currentUser.uid)
+      .collection("userPosts")
+      .add({
+        downloadURL: url,
+        caption: caption,
+        creation: firebase.firestore.FieldValue.serverTimestamp(),
+      })
+      .then(() => {
+        navigation.popToTop();
+      });
+  };
+
   return (
     <View style={styles.container}>
       <Image source={{ uri: imageUri }} style={{ flex: 1 }} />
