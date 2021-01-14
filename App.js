@@ -17,6 +17,7 @@ import RegisterScreen from "./components/auth/Register";
 import LoginScreen from "./components/auth/Login";
 import MainScreen from "./components/Main";
 import Add from "./components/main/Add";
+import Save from "./components/main/Save";
 
 import { firebaseConfig } from "./config";
 
@@ -81,6 +82,7 @@ export default class App extends Component {
               options={{ headerShown: false }}
             />
             <Stack.Screen name="Add" component={Add} />
+            <Stack.Screen name="Save" component={Save} />
           </Stack.Navigator>
         </NavigationContainer>
       </Provider>
