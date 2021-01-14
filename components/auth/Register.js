@@ -1,6 +1,7 @@
 import React, { Component } from "react";
-import { View, Button, TextInput } from "react-native";
-import firebase from "firebase";
+import { View, Button, TextInput, FlatList } from "react-native";
+import firebase from "firebase/app";
+import "firebase/firestore";
 export default class Register extends Component {
   constructor(props) {
     super(props);
@@ -51,6 +52,7 @@ export default class Register extends Component {
             this.setState({ password });
           }}
         />
+
         <Button title={"Register"} onPress={() => this.onSignUp()} />
       </View>
     );
