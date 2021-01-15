@@ -10,19 +10,25 @@ import Add from "./main/Add";
 
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { fetchUser } from "../redux/actions/index";
+import { fetchUser, fetchUserPosts } from "../redux/actions/index";
 import { NavigationContainer } from "@react-navigation/native";
 import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
 
 const Tab = createMaterialBottomTabNavigator();
 
+const NoScreen = () => {
+  return null;
+};
+
 class Main extends Component {
   componentDidMount() {
     this.props.fetchUser();
+    this.props.fetchUserPosts();
   }
   render() {
-    const { currentUser } = this.props;
+    const { currentUser, posts } = this.props;
     console.log("currentUser: ", currentUser);
+    console.log("currentUser posts: ", posts);
     return (
       <Tab.Navigator initialRouteName="Feed" labeled={false}>
         <Tab.Screen
@@ -36,7 +42,7 @@ class Main extends Component {
         />
         <Tab.Screen
           name="MainAdd"
-          component={() => null}
+          component={NoScreen}
           listeners={({ navigation }) => ({
             tabPress: (event) => {
               event.preventDefault();
@@ -69,12 +75,14 @@ class Main extends Component {
 
 const mapStateToProps = (store) => ({
   currentUser: store.userState.currentUser,
+  posts: store.userState.posts,
 });
 
 const mapDispatchProps = (dispatch) =>
   bindActionCreators(
     {
       fetchUser,
+      fetchUserPosts,
     },
     dispatch
   );
