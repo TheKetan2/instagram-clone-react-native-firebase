@@ -13,6 +13,10 @@ import { bindActionCreators } from "redux";
 import { fetchUser, fetchUserPosts } from "../redux/actions/index";
 import { NavigationContainer } from "@react-navigation/native";
 import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
+import Search from "./main/Search";
+
+import firebase from "firebase";
+require("firebase/firestore");
 
 const Tab = createMaterialBottomTabNavigator();
 
@@ -40,6 +44,16 @@ class Main extends Component {
             ),
           }}
         />
+
+        <Tab.Screen
+          name="Search"
+          component={Search}
+          options={{
+            tabBarIcon: ({ color, size }) => (
+              <MaterialCommunityIcons name="magnify" size={24} color={color} />
+            ),
+          }}
+        />
         <Tab.Screen
           name="MainAdd"
           component={NoScreen}
@@ -58,6 +72,14 @@ class Main extends Component {
         <Tab.Screen
           name="Profile"
           component={Profile}
+          listeners={({ navigation }) => ({
+            tabPress: (event) => {
+              event.preventDefault();
+              navigation.navigate("Profile", {
+                uid: firebase.auth().currentUser.uid,
+              });
+            },
+          })}
           options={{
             tabBarIcon: ({ color, size }) => (
               <MaterialCommunityIcons
