@@ -19,18 +19,18 @@ export default function Add({ navigation }) {
       const ip = await ImagePicker.getMediaLibraryPermissionsAsync();
       console.log(ip.status);
       setGalleryPermission(ip.status === "granted");
-      if (ip.status !== "granted") {
-        alert("Permission for media access needed.");
-      }
+      // if (ip.status !== "granted") {
+      //   alert("Permission for media access needed.");
+      // }
     })();
   }, []);
 
-  if (cameraPermission === null || galleryPermission === null) {
-    return <View />;
-  }
-  if (cameraPermission === false || galleryPermission === false) {
-    return <Text>No access to camera or gallery</Text>;
-  }
+  // if (cameraPermission === null || galleryPermission === null) {
+  //   return <View />;
+  // }
+  // if (cameraPermission === false || galleryPermission === false) {
+  //   return <Text>No access to camera or gallery</Text>;
+  // }
 
   const takePicture = async () => {
     if (camera) {
