@@ -49,7 +49,12 @@ const Profile = (props) => {
           setUserPosts(posts);
         });
     }
-  }, [props.route.params.uid]);
+    if (props.following.indexOf(props.route.params.uid) >= 0) {
+      setFollowing(true);
+    } else {
+      setFollowing(false);
+    }
+  }, [props.route.params.uid, props.following]);
 
   const onFollow = () => {
     firebase
@@ -68,6 +73,7 @@ const Profile = (props) => {
       .collection("userFollowing")
       .doc(props.route.params.uid)
       .delete();
+    console.log("deleted");
   };
 
   if (user === null) {
@@ -82,7 +88,7 @@ const Profile = (props) => {
         {props.route.params.uid !== firebase.auth().currentUser.uid ? (
           <View>
             {following ? (
-              <Button title={"Following"} onPres={() => onUnfollow()} />
+              <Button title={"Following"} onPress={() => onUnfollow()} />
             ) : (
               <Button title={"Follow"} onPress={() => onFollow()} />
             )}
@@ -111,6 +117,7 @@ const Profile = (props) => {
 const mapStateToProps = (store) => ({
   currentUser: store.userState.currentUser,
   posts: store.userState.posts,
+  following: store.userState.following,
 });
 
 export default connect(mapStateToProps, null)(Profile);

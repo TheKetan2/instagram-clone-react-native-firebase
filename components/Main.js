@@ -10,7 +10,11 @@ import Add from "./main/Add";
 
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { fetchUser, fetchUserPosts } from "../redux/actions/index";
+import {
+  fetchUser,
+  fetchUserPosts,
+  fetchUserFollowing,
+} from "../redux/actions/index";
 import { NavigationContainer } from "@react-navigation/native";
 import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
 import Search from "./main/Search";
@@ -28,6 +32,7 @@ class Main extends Component {
   componentDidMount() {
     this.props.fetchUser();
     this.props.fetchUserPosts();
+    this.props.fetchUserFollowing();
   }
   render() {
     const { currentUser, posts } = this.props;
@@ -105,6 +110,7 @@ const mapDispatchProps = (dispatch) =>
     {
       fetchUser,
       fetchUserPosts,
+      fetchUserFollowing,
     },
     dispatch
   );
