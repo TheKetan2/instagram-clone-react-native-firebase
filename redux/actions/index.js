@@ -3,6 +3,7 @@ import {
   USER_STATE_CHANGE,
   USER_POST_STATE_CHANGE,
   USER_FOLLOWING_STATE_CHANGE,
+  USERS_DATA_STATE_CHANGE,
 } from "../constants/index";
 
 export function fetchUser() {
@@ -62,5 +63,32 @@ export function fetchUserFollowing() {
         console.log(following);
         dispatch({ type: USER_FOLLOWING_STATE_CHANGE, following });
       });
+  };
+}
+
+export function fetchUsersData(uid) {
+  return (dispatch, getState) => {
+    const found = getState().usersState.users.some((el) => el.uid === uid);
+
+    if (!found) {
+      firebase
+        .firestore()
+        .collection("users")
+        .doc(uid)
+        .get()
+        .then((snapshot) => {
+          if (snapshot.exists) {
+            console.log(snapshot.data());
+            let user = snapshot.data();
+            user.uid = snapshot.id;
+            dispatch({
+              type: USERS_DATA_STATE_CHANGE,
+              user,
+            });
+          } else {
+            console.log("does not exist");
+          }
+        });
+    }
   };
 }
