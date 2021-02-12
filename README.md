@@ -4,4 +4,4 @@ Project finished while following FCC's youtube channel tutorial https://www.yout
 
 ## Screenshots:
 
-![feed]("assets/feed.jpg")
+![feed](assets/feed.jpg)
