@@ -5,13 +5,12 @@ Project finished while following FCC's youtube tutorial https://www.youtube.com/
 ## Screenshots:
 
 |-----|-----|
-|![feed](assets/feed.jpg)|
-![Camera](assets/camera.jpg)|
+|||
+|||
 
-### Users
-
-![Users](assets/users.jpg)
-
-### Profile
-
-![Profile](assets/profile.jpg)
+| Page    | Screenshot                     |
+| ------- | ------------------------------ |
+| Feed    | ![feed](assets/feed.jpg)       |
+| Camera  | ![Camera](assets/camera.jpg)   |
+| Users   | ![Users](assets/users.jpg)     |
+| Profile | ![Profile](assets/profile.jpg) |
