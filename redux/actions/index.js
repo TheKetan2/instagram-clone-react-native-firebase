@@ -85,10 +85,43 @@ export function fetchUsersData(uid) {
               type: USERS_DATA_STATE_CHANGE,
               user,
             });
+
+            dispatch(fetchUsersFollowingPosts(user.id));
           } else {
             console.log("does not exist");
           }
         });
     }
+  };
+}
+
+export function fetchUsersFollowingPosts(uid) {
+  return (dispatch, getState) => {
+    firebase
+      .firestore()
+      .collection("posts")
+      .doc(uid)
+      .collection("userPosts")
+      .orderBy("creation", "asc")
+      .get()
+      .then((snapshot) => {
+        const uid = snapshot.query.EP.path.segments[1];
+
+        console.log(snapshot, uid);
+
+        const user = getState().usersState.users.find((el) => el.uid === uid);
+
+        let posts = snapshot.docs.map((doc) => {
+          const data = doc.data();
+          const id = doc.id;
+          return { id, ...data, user };
+        });
+        console.log(posts);
+        dispatch({ type: USERS_POST_STATE_CHANGE, posts: posts });
+
+        for (let i = 0; i < following.length; i++) {
+          dispatch(fetchUsersData(following[i]));
+        }
+      });
   };
 }
