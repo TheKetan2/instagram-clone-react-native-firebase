@@ -4,10 +4,6 @@ Project finished while following FCC's youtube tutorial https://www.youtube.com/
 
 ## Screenshots:
 
-|-----|-----|
-|||
-|||
-
 | Page    | Screenshot                     |
 | ------- | ------------------------------ |
 | Feed    | ![feed](assets/feed.jpg)       |
