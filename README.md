@@ -4,13 +4,9 @@ Project finished while following FCC's youtube tutorial https://www.youtube.com/
 
 ## Screenshots:
 
-### Feed
-
-![feed](assets/feed.jpg)
-
-### Camera
-
-![Camera](assets/camera.jpg)
+|-----|-----|
+|![feed](assets/feed.jpg)|
+![Camera](assets/camera.jpg)|
 
 ### Users
 
