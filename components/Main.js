@@ -14,6 +14,7 @@ import {
   fetchUser,
   fetchUserPosts,
   fetchUserFollowing,
+  clearData,
 } from "../redux/actions/index";
 import { NavigationContainer } from "@react-navigation/native";
 import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
@@ -30,6 +31,7 @@ const NoScreen = () => {
 
 class Main extends Component {
   componentDidMount() {
+    this.props.clearData();
     this.props.fetchUser();
     this.props.fetchUserPosts();
     this.props.fetchUserFollowing();
@@ -111,6 +113,7 @@ const mapDispatchProps = (dispatch) =>
       fetchUser,
       fetchUserPosts,
       fetchUserFollowing,
+      clearData,
     },
     dispatch
   );
