@@ -18,6 +18,7 @@ import LoginScreen from "./components/auth/Login";
 import MainScreen from "./components/Main";
 import Add from "./components/main/Add";
 import Save from "./components/main/Save";
+import Comment from "./components/main/Comment";
 
 import { firebaseConfig } from "./config";
 
@@ -75,6 +76,7 @@ export default class App extends Component {
             <Stack.Screen name="Main" component={MainScreen} />
             <Stack.Screen name="Add" component={Add} />
             <Stack.Screen name="Save" component={Save} />
+            <Stack.Screen name="Comment" component={Comment} />
           </Stack.Navigator>
         </NavigationContainer>
       </Provider>
