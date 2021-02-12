@@ -4,6 +4,6 @@ Project finished while following FCC's youtube tutorial https://www.youtube.com/
 
 ## Screenshots:
 
-| Feed                     | Camera                       | Users                      | Camera                         |
+| Feed                     | Camera                       | Users                      | Profile                        |
 | ------------------------ | ---------------------------- | -------------------------- | ------------------------------ |
 | ![feed](assets/feed.jpg) | ![Camera](assets/camera.jpg) | ![Users](assets/users.jpg) | ![Profile](assets/profile.jpg) |
